@@ -78,7 +78,38 @@ public class Invoice {
     //Daten updaten
     public static void updateInvoice(int id, Date date, String description, double value, Boolean paid)
     {
+        try
+        {
+            //Treiber
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
+            //Connection
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
+
+            //Statement
+            String query = "update userdb.tblinvoice SET date = ?, description = ?, value = ?, paid = ? WHERE id = ?";
+            PreparedStatement stmt = connect.prepareStatement(query);
+
+            //Daten setzen
+            stmt.setDate(1, date);
+            stmt.setString(2, description);
+            stmt.setDouble(3, value);
+            stmt.setBoolean(4, paid);
+            stmt.setInt(5, id);
+
+            //SQL ausführen
+            stmt.executeUpdate();
+
+            //Verbindung schließen
+            stmt.close();
+            connect.close();
+        }
+
+        //Fehlermeldung
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     //Daten löschen
