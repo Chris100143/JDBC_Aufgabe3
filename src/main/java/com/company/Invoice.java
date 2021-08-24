@@ -1,3 +1,9 @@
+/**
+ * @author Christoph Lottersberger
+ * @version 1.0.0
+ * @since 24.08.2021
+ */
+
 package com.company;
 
 //Importieren
@@ -7,6 +13,7 @@ import java.sql.*;
 public class Invoice {
 
     //Daten anzeigen
+
     public static void showInvoices()
     {
         try
@@ -42,6 +49,14 @@ public class Invoice {
     }
 
     //Daten einfügen
+
+    /**
+     *
+     * @param date - das Datum
+     * @param description - die Beschreibung
+     * @param value - der Preis
+     * @param paid - bezahlt (true/false)
+     */
     public static void insertInvoice(Date date, String description, double value, Boolean paid)
     {
         try
@@ -78,6 +93,15 @@ public class Invoice {
     }
 
     //Daten updaten
+
+    /**
+     *
+     * @param id - die ID (Primary Key) von der Tabelle
+     * @param date - das Datum
+     * @param description - die Beschreibung
+     * @param value - der Preis
+     * @param paid - bezahlt (true/false)
+     */
     public static void updateInvoice(int id, Date date, String description, double value, Boolean paid)
     {
         try
@@ -115,6 +139,11 @@ public class Invoice {
     }
 
     //Daten löschen
+
+    /**
+     *
+     * @param id - die ID (Primary Key) von der Tabelle
+     */
     public static void deleteInvoice(int id)
     {
         try

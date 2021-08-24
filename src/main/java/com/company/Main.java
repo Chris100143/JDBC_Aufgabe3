@@ -1,11 +1,22 @@
+/**
+ * @author Christoph Lottersberger
+ * @version 1.0.0
+ * @since 24.08.2021
+ */
+
 package com.company;
 
+//Importieren
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         //Methoden ausführen
