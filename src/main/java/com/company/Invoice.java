@@ -29,6 +29,7 @@ public class Invoice {
             }
 
             //Verbindung schließen
+            stmt.close();
             connect.close();
         }
 
@@ -51,7 +52,7 @@ public class Invoice {
             Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
 
             //Statement
-            String query = "insert into userdb.tblinvoice (date, description, value, paid) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO userdb.tblinvoice (date, description, value, paid) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connect.prepareStatement(query);
 
             //Daten setzen
@@ -78,13 +79,71 @@ public class Invoice {
     //Daten updaten
     public static void updateInvoice(int id, Date date, String description, double value, Boolean paid)
     {
+        try
+        {
+            //Treiber
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
+            //Connection
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
+
+            //Statement
+            String query = "UPDATE userdb.tblinvoice SET date = ?, description = ?, value = ?, paid = ? WHERE id = ?";
+            PreparedStatement stmt = connect.prepareStatement(query);
+
+            //Daten setzen
+            stmt.setDate(1, date);
+            stmt.setString(2, description);
+            stmt.setDouble(3, value);
+            stmt.setBoolean(4, paid);
+            stmt.setInt(5, id);
+
+            //SQL ausführen
+            stmt.executeUpdate();
+
+            //Verbindung schließen
+            stmt.close();
+            connect.close();
+        }
+
+        //Fehlermeldung
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     //Daten löschen
     public static void deleteInvoice(int id)
     {
+        try
+        {
+            //Treiber
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
+            //Connection
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
+
+            //Statement
+            String query = "DELETE FROM userdb.tblinvoice WHERE id = ?";
+            PreparedStatement stmt = connect.prepareStatement(query);
+
+            //Daten setzen
+            stmt.setInt(1, id);
+
+            //SQL ausführen
+            stmt.executeUpdate();
+
+            //Verbindung schließen
+            stmt.close();
+            connect.close();
+        }
+
+        //Fehlermeldung
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 }
