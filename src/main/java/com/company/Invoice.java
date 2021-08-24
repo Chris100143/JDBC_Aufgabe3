@@ -29,7 +29,6 @@ public class Invoice {
             }
 
             //Verbindung schließen
-            stmt.close();
             connect.close();
         }
 
@@ -52,7 +51,7 @@ public class Invoice {
             Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
 
             //Statement
-            String query = "INSERT INTO userdb.tblinvoice (date, description, value, paid) VALUES (?, ?, ?, ?)";
+            String query = "insert into userdb.tblinvoice (date, description, value, paid) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connect.prepareStatement(query);
 
             //Daten setzen
@@ -88,7 +87,7 @@ public class Invoice {
             Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
 
             //Statement
-            String query = "UPDATE userdb.tblinvoice SET date = ?, description = ?, value = ?, paid = ? WHERE id = ?";
+            String query = "update userdb.tblinvoice SET date = ?, description = ?, value = ?, paid = ? WHERE id = ?";
             PreparedStatement stmt = connect.prepareStatement(query);
 
             //Daten setzen
@@ -116,34 +115,7 @@ public class Invoice {
     //Daten löschen
     public static void deleteInvoice(int id)
     {
-        try
-        {
-            //Treiber
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            //Connection
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb","root","");
-
-            //Statement
-            String query = "DELETE FROM userdb.tblinvoice WHERE id = ?";
-            PreparedStatement stmt = connect.prepareStatement(query);
-
-            //Daten setzen
-            stmt.setInt(1, id);
-
-            //SQL ausführen
-            stmt.executeUpdate();
-
-            //Verbindung schließen
-            stmt.close();
-            connect.close();
-        }
-
-        //Fehlermeldung
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
     }
 
 }
